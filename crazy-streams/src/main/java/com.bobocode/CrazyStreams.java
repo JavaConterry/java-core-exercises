@@ -2,6 +2,7 @@ package com.bobocode;
 
 import com.bobocode.exception.EntityNotFoundException;
 import com.bobocode.model.Account;
+import com.bobocode.model.Sex;
 
 import java.math.BigDecimal;
 import java.time.Month;
@@ -57,7 +58,24 @@ public class CrazyStreams {
      * @return a map where key is true or false, and value is list of male, and female accounts
      */
     public Map<Boolean, List<Account>> partitionMaleAccounts() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+
+        List<Account> maleAccounts = accounts.stream()
+                .filter(a -> a.getSex().equals(Sex.MALE))
+                .collect(toList());
+
+        List<Account> femaleAccounts = accounts.stream()
+                .filter(a -> a.getSex().equals(Sex.FEMALE))
+                .collect(toList());
+
+        List<Integer> list = Collections.EMPTY_LIST;
+        list.forEach(inListInt -> {System.out.println(inListInt);});
+
+        Map map = Collections.EMPTY_MAP;
+
+        map.put(true, maleAccounts);
+        map.put(false, femaleAccounts);
+
+        return map;
     }
 
     /**
